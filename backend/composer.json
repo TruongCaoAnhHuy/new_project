@@ -1,0 +1,15 @@
+{
+    "name": "huytc/backend",
+    "autoload": {
+        "psr-4": {
+            "Huytc\\backend\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "TruongCaoAnhHuy",
+            "email": "huy96qt123@gmail.com"
+        }
+    ],
+    "require": {}
+}

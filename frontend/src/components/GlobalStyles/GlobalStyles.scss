@@ -2,7 +2,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 :root {
+    --primary: #C0C0C0;
+    --border : #333333;
 
+    --text: #333333;
+
+    --hue: 223;
+	--bg: hsl(var(--hue),10%,5%);
+	--fg: hsl(var(--hue),10%,95%);
+	--dot-a: 313;
+	--dot-b: 253;
+	--dot-c: 223;
+	--dot-d: 283;
+	--trans-dur: 0.3s;
 }
 
 * {

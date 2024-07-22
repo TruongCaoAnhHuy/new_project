@@ -1,0 +1,46 @@
+RewriteEngine On
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-l
+
+RewriteRule ^(.+?)/?$ index.php?route=$1 [QSA,L]
+
+Options -Indexes
+
+<Files "data_user.xlsx">
+    Order Allow,Deny
+    Deny from all
+</Files>
+<Files "composer.json">
+    Order Allow,Deny
+    Deny from all
+</Files>
+<Files "composer.lock">
+    Order Allow,Deny
+    Deny from all
+</Files>
+<Files ".gitignore">
+    Order Allow,Deny
+    Deny from all
+</Files>
+<Files ".env.dev">
+    Order Allow,Deny
+    Deny from all
+</Files>
+<Files ".env.prod">
+    Order Allow,Deny
+    Deny from all
+</Files>
+<Files "error_404.php">
+    Order Allow,Deny
+    Deny from all
+</Files>
+<Files "error_500.php">
+    Order Allow,Deny
+    Deny from all
+</Files>
+<IfModule mod_info.c>
+    # Tắt module info
+    SetEnvIf Request_URI "^/server-info$" noindex
+</IfModule>
