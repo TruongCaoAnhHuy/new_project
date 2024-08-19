@@ -1,38 +1,39 @@
 <?php
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
-header("Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With");
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: POST, OPTIONS');
+header('Access-Control-Allow-Headers: Content-Type');
+header('Content-Type: application/json');
 
 require '../configs/config.php';
 require '../models/UserModel.php';
 
+if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
+    exit;
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $userModel = get_user();
+    $collection = get_collection(get_database('Users'), 'users');
+
     $input = json_decode(file_get_contents("php://input"), true);
     $name = $input['userName'];
     $pass = $input['pass'];
 
-    // Xử lý dữ liệu tại đây
-    // Ví dụ: Lưu vào cơ sở dữ liệu
+    if (isset($input['userName']) && isset($input['pass'])) {
 
-    // get API user
-    function checkUserCredentials($username, $password)
-    {
-        $users = json_decode(connect_api(get_user_url()), true);
+        $userFinded = $collection->findOne(['username' => $name]);
 
-        // Loop through the users to check credentials
-        foreach ($users['users'] as $user) {
-            if ($user['username'] === $username && $user['password'] === $password) {
-                return true;
+        if($userFinded) {
+            if($pass === $userFinded['password']) {
+                echo json_encode(["status" => "success", "message" => "Login success...", "name" => $name]);
+            } else {
+                echo json_encode(["status" => "error", "message" => "Incorrect password. Please try again."]);
             }
+        } else {
+            echo json_encode(["status" => "error", "message" => "Incorrect username. Please try again."]);
         }
-
-        return false;
-    }
-
-    if (checkUserCredentials($name, $pass)) {
-        echo json_encode(["status" => "success", "message" => "Login success...", "name" => $name, "pass" => $pass]);
     } else {
-        echo json_encode(["status" => "error", "message" => "Incorrect username or password. Please try again."]);
+        echo json_encode(["status" => "error", "message" => "Invalid input"]);
     }
 } else {
     echo json_encode(["status" => "error", "message" => "Invalid request"]);

@@ -1,0 +1,58 @@
+.wrapper {
+    background-image: url(https://i.imgur.com/iWUM6.jpg);
+    background-size: fit;
+    background-color: #fff;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.title {
+    text-align: center;
+    margin-bottom: 20px;
+    color: var(--text);
+}
+
+.form {
+    background-color: #fff;
+    padding: 30px;
+    // border: 1px solid var(--border);
+    // border-radius: 5px;
+    box-shadow: 0px 0px 8px 10px rgba(0,0,0,0.1);
+}
+
+.input {
+    border-radius: 5px;
+}
+
+.btn {
+    border-radius: 50px;
+    background-image:  url(https://i.imgur.com/iWUM6.jpg);
+    color: #fff;
+    box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.2),
+							0 -0.25rem 1.5rem rgb(15, 62, 155) inset,
+							0 0.75rem 0.5rem rgba(255, 255, 255, 0.4) inset,
+							0 0.25rem 0.5rem 0 rgb(70, 141, 207) inset;
+
+    &::before {
+        content:'';
+        width: 70%;
+        height: 3px;
+        position: absolute;
+        left: 50%;
+        top: 4px;
+        transform: translateX(-50%);
+        background-color: #fff;
+        border-radius: 50%;
+        opacity: .7;
+    }
+}
+
+.error-msg {
+    width: 320px;
+    color: red;
+    font-size: 1.4rem;
+}
+
+// modal

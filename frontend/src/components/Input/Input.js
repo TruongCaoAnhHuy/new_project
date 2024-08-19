@@ -38,7 +38,7 @@ function Input({ id, className, children, login, leftIcon, icon, placeholder, ty
                 <FontAwesomeIcon
                     onClick={changevalue}
                     className={cx('icon')}
-                    icon={valueInput === 'password' ? faEyeSlash : faEye}
+                    icon={valueInput === 'password' ? faEye : faEyeSlash}
                 />
             )}
         </div>

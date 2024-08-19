@@ -1,17 +1,17 @@
 <?php 
-    function connect_api($url) {
-        $ch = curl_init();
+    require '../vendor/autoload.php';
 
-        // Set CURL options
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    $mongodb = new MongoDB\Client("mongodb+srv://huy96qt123:anhhuy123@phone.bibby.mongodb.net/?retryWrites=true&w=majority&appName=Phone");
 
-        // Execute the CURL session and get the response
-        $response = curl_exec($ch);
-
-        // Close the CURL session
-        curl_close($ch);
-
-        return $response;
+    function get_database($database) {
+        global $mongodb;
+        $data = $mongodb->$database; 
+        return $data;
     }
+
+    function get_collection($variable, $collection) {
+        $data = $variable->$collection;
+        return $data;
+    }
+
 

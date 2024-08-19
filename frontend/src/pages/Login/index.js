@@ -31,42 +31,38 @@ function Login() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (formData.userName === '' || formData.pass === '') {
-            setErrMsg('Please fill all fields');
-        } else {
-            setLoading(true);
-            await fetch('http://localhost/test_php_react/backend/controllers/LoginController.php', {
-                method: 'post',
-                mode: 'cors',
-                headers: {
-                    'Content-type': 'application/json',
-                },
-                body: JSON.stringify(formData),
-            })
-                .then(async (response) => {
-                    console.log(response);
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    } else {
-                        const data = await response.json();
 
-                        if (data.status === 'success') {
-                            setLoading(false);
-                            navigate('/');
-                            sessionStorage.setItem('userName', JSON.stringify(data.name));
-                            setErrMsg('');
-                        } else {
-                            setLoading(false);
-                            setErrMsg(data.message);
-                        }
+        setLoading(true);
+        await fetch('http://localhost/test_php_react/backend/controllers/LoginController.php', {
+            method: 'post',
+            headers: {
+                'Content-type': 'application/json',
+            },
+            body: JSON.stringify(formData),
+        })
+            .then(async (response) => {
+                console.log(response);
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                } else {
+                    const data = await response.json();
+
+                    if (data.status === 'success') {
+                        setLoading(false);
+                        navigate('/');
+                        sessionStorage.setItem('userName', JSON.stringify(data.name));
+                        setErrMsg('');
+                    } else {
+                        setLoading(false);
+                        setErrMsg(data.message);
                     }
-                })
-                .catch((err) => {
-                    console.log(err);
-                    setErrMsg('Network issue. Unable to connect to the server. Please try again.');
-                    setLoading(false);
-                });
-        }
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+                setErrMsg('Unable to connect to the server. Please try again.');
+                setLoading(false);
+            });
     };
 
     return (
@@ -90,10 +86,10 @@ function Login() {
                         className={cx('input')}
                         login
                         leftIcon
-                        type="password"
                         id="pass"
                         placeholder="Password"
                         name="pass"
+                        type="password"
                         required
                         onChange={handleChange}
                     >

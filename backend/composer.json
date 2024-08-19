@@ -11,5 +11,7 @@
             "email": "huy96qt123@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "mongodb/mongodb": "^1.19"
+    }
 }
